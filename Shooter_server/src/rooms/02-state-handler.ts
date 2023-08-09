@@ -3,10 +3,22 @@ import { Schema, type, MapSchema } from "@colyseus/schema";
 
 export class Player extends Schema {
     @type("number")
-    x = Math.floor(Math.random() * 400);
+    pX = Math.floor(Math.random() * 5) - 2.5;
 
     @type("number")
-    y = Math.floor(Math.random() * 400);
+    pY = 0;
+
+    @type("number")
+    pZ = Math.floor(Math.random() * 5) - 2.5;
+
+    @type("number")
+    vX = 0;
+
+    @type("number")
+    vY = 0;
+
+    @type("number")
+    vZ = 0;
 }
 
 export class State extends Schema {
@@ -15,7 +27,7 @@ export class State extends Schema {
 
     something = "This attribute won't be sent to the client-side";
 
-    createPlayer(sessionId: string) {
+    createPlayer(sessionId: string, data: any) {
         this.players.set(sessionId, new Player());
     }
 
@@ -23,13 +35,13 @@ export class State extends Schema {
         this.players.delete(sessionId);
     }
 
-    movePlayer (sessionId: string, movement: any) {
-        if (movement.x) {
-            this.players.get(sessionId).x += movement.x * 10;
-
-        } else if (movement.y) {
-            this.players.get(sessionId).y += movement.y * 10;
-        }
+    movePlayer (sessionId: string, data: any) {
+        this.players.get(sessionId).pX = data.pX;
+        this.players.get(sessionId).pY = data.pY;
+        this.players.get(sessionId).pZ = data.pZ;
+        this.players.get(sessionId).vX = data.vX;
+        this.players.get(sessionId).vY = data.vY;
+        this.players.get(sessionId).vZ = data.vZ;
     }
 }
 
@@ -47,18 +59,16 @@ export class StateHandlerRoom extends Room<State> {
         });
     }
 
-    // onAuth(client, options, req) {
-    //     return true;
-    // }
+    onAuth(client, options, req) {
+        return true;
+    }
 
-    onJoin (client: Client) {
-        // client.send("hello", "world");
-        console.log(client.sessionId, "joined!");
-        this.state.createPlayer(client.sessionId);
+    onJoin (client: Client, data: any) {
+        client.send("hello", "world");
+        this.state.createPlayer(client.sessionId, data);
     }
 
     onLeave (client) {
-        console.log(client.sessionId, "left!");
         this.state.removePlayer(client.sessionId);
     }
 

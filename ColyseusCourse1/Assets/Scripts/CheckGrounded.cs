@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CheckGrounded : MonoBehaviour
+{
+    public bool IsGrounded { get; private set; }
+
+    [SerializeField] private LayerMask _layerMask; 
+    [SerializeField] private float _radius;
+    [SerializeField] private float _coyoteTime = 0.15f;
+    private float _flyTimer = 0;
+
+    private void Update()
+    {
+        if (Physics.CheckSphere(transform.position, _radius, _layerMask))
+        {
+            IsGrounded = true;
+            _flyTimer = 0;
+        }
+        else
+        {
+            _flyTimer += Time.deltaTime;
+
+            if (_flyTimer > _coyoteTime)
+                IsGrounded = false;
+        } 
+    }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, _radius);
+    }
+}
+#endif
