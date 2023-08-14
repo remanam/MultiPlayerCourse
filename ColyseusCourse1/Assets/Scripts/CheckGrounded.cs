@@ -32,5 +32,5 @@ public class CheckGrounded : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, _radius);
     }
-}
 #endif
+}

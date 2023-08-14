@@ -5,6 +5,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     [SerializeField] private PlayerCharacter _player;
+    [SerializeField] private PlayerGun _gun;
     [SerializeField] private float _mouseSencetivity = 2f;
 
     private float _inputH;
@@ -12,7 +13,6 @@ public class Controller : MonoBehaviour
 
     private float _mouseX;
     private float _mouseY;
-
 
     private void Update()
     {
@@ -23,12 +23,16 @@ public class Controller : MonoBehaviour
         _mouseX = Input.GetAxis("Mouse X");
         _mouseY = Input.GetAxis("Mouse Y");
 
-        bool space = Input.GetKeyDown(KeyCode.Space);
+        bool spacePressed = Input.GetKey(KeyCode.Space);
+
+        bool leftClickPressed = Input.GetMouseButtonDown(0);
 
         _player.SetInput(_inputH, _inputV, _mouseX * _mouseSencetivity);
         _player.RotateX(-1 * _mouseY * _mouseSencetivity); // Инвертируем значение поворота
 
-        if (space) _player.Jump();
+        if (spacePressed) _player.Jump();
+
+        if (leftClickPressed) _gun.Shoot();
 
         SendMove();
 
@@ -37,7 +41,7 @@ public class Controller : MonoBehaviour
 
     private void SendMove()
     {
-        _player.GetMoveInfo(out Vector3 position, out Vector3 velocity);
+        _player.GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY);
 
         Dictionary<string, object> data = new Dictionary<string, object>()
         {
@@ -47,6 +51,8 @@ public class Controller : MonoBehaviour
             {"vX", velocity.x},
             {"vY", velocity.y},
             {"vZ", velocity.z},
+            {"rX", rotateX},
+            {"rY", rotateY},
         };
 
         MultiplayerManager.Instance.SendMessage("move", data);

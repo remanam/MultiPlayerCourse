@@ -44,15 +44,10 @@ public class PlayerCharacter : Character
 
     private void Move()
     {
-
         Vector3 velocity = (transform.forward * _inputV + transform.right * _inputH).normalized * speed;
-        Debug.Log(velocity);
 
         velocity.y = _rigidbody.velocity.y; //Когда мы отпускаем кнопки veloicty Y = 0. Надо делать его актуальным
         base.velocity = velocity;
-
-
-        Debug.Log(_inputV);
 
         _rigidbody.velocity = base.velocity;
     }
@@ -82,9 +77,12 @@ public class PlayerCharacter : Character
         _head.localEulerAngles = new Vector3(_currentRotateX, 0, 0);
     }
 
-    public void GetMoveInfo(out Vector3 position, out Vector3 velocity)
+    public void GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY)
     {
         position = transform.position;
         velocity = _rigidbody.velocity;
+        rotateY = transform.eulerAngles.y;
+        rotateX = _head.transform.localEulerAngles.x;
+
     }
 }

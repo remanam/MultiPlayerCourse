@@ -8,6 +8,24 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyCharacter _enemyCharacter;
     private List<float> _lastFiveIntervals = new List<float> { 0, 0, 0, 0, 0 };
+
+    private Player _player;
+
+    public void Init(Player player)
+    {
+        _player = player;
+        _enemyCharacter.SetSpeed(player.speed);
+
+        player.OnChange += OnChange;
+    }
+
+    public void OnDestroy()
+    {
+        _player.OnChange -= OnChange;
+
+        Destroy(gameObject);
+    }
+
     private float AvarageTimeInterval
     {
         get
@@ -36,13 +54,13 @@ public class EnemyController : MonoBehaviour
         _lastFiveIntervals.Remove(0); // В конец добавили, а в начале удалили
     }
 
-    public void OnChanged(List<DataChange> changes)
+    public void OnChange(List<DataChange> changes)
     {
         SaveRecieveTime(); // Time.deltatime но для обновлений от сервера
 
 
         Vector3 position = _enemyCharacter._targetPosition;
-        Vector3 velocity = Vector3.zero;
+        Vector3 velocity = _enemyCharacter.velocity;
 
         foreach (var dataChange in changes)
         {
@@ -65,6 +83,12 @@ public class EnemyController : MonoBehaviour
                     break;
                 case "vZ":
                     velocity.z = (float)dataChange.Value;
+                    break;
+                case "rX":
+                    _enemyCharacter.SetRotateX((float)dataChange.Value);
+                    break;
+                case "rY":
+                    _enemyCharacter.SetRotateY((float)dataChange.Value);
                     break;
                 default:
                     Debug.LogWarning("Field " + dataChange.Field + "is not handled!");
