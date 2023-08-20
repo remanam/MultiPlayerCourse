@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5275154302005803161}
   - component: {fileID: 2232124408162188704}
   - component: {fileID: 95064599417224567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8897710223606171652}
   - component: {fileID: 8805077051869070528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 600321792462173749}
   - component: {fileID: 7568382418640682955}
   - component: {fileID: 6892447398264579730}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00576389b5a38046a094b95b3a31965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifetime: 3
   _rb: {fileID: 6892447398264579730}
 --- !u!54 &6892447398264579730
 Rigidbody:
