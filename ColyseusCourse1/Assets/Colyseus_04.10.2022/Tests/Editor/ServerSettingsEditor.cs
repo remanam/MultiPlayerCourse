@@ -18,7 +18,7 @@ public class ServerSettingsEditor : Editor
     private float buttonWidth = 250;
     private float sectionSpacer = 20;
 
-	private static string IconDirectory = Path.Combine("Runtime", "Editor Default Resources", "Icons", "ColyseusSettings");
+	private static string IconDirectory = Path.Combine("Resources", "Icons", "ColyseusSettings.png");
 
 	void OnEnable()
     {
@@ -36,7 +36,7 @@ public class ServerSettingsEditor : Editor
 		}
 		else
 		{
-			content = EditorGUIUtility.IconContent(Path.Combine("Packages", "io.colyseus.sdk", IconDirectory));
+			// Убрал, а то ошибка загрузки иконки content = EditorGUIUtility.IconContent(Path.Combine("Packages", "io.colyseus.sdk", IconDirectory));
 		}
 
 		if (content != null)

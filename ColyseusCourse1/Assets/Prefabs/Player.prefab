@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d66e90668135647b8de012d2145988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <speed>k__BackingField: 2
+  <speed>k__BackingField: 6
   <maxHealth>k__BackingField: 10
   _health: {fileID: 1874851138891093385}
   _rigidbody: {fileID: 5364588513061721247}
@@ -556,7 +556,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 7568382418640682955, guid: 4f48bfb64cab91043986b84a3be7f117, type: 3}
   _damage: 1
   _bulletPoint: {fileID: 709872463714249834}
-  _bulletSpeed: 10
+  _bulletSpeed: 15
   _shootDelay: 0.2
 --- !u!114 &8776845989547805449
 MonoBehaviour:
@@ -754,10 +754,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 728736026450625697, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 482ec0885ec3ceb428a862c9091f01db, type: 2}
+    - target: {fileID: 985127877922057572, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 482ec0885ec3ceb428a862c9091f01db, type: 2}
     - target: {fileID: 1256858935092959320, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
       propertyPath: m_Constraints
       value: 48
       objectReference: {fileID: 0}
+    - target: {fileID: 1812310096119310209, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 482ec0885ec3ceb428a862c9091f01db, type: 2}
     - target: {fileID: 1838313205800854970, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -770,6 +782,14 @@ PrefabInstance:
       propertyPath: _minHeadAngle
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 3296279339558041490, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 482ec0885ec3ceb428a862c9091f01db, type: 2}
+    - target: {fileID: 5586526755382085090, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 482ec0885ec3ceb428a862c9091f01db, type: 2}
     - target: {fileID: 6436127790918441242, guid: b623a5bdfebcd8c469173c6597cf807a, type: 3}
       propertyPath: m_Name
       value: Character
